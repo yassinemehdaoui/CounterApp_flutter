@@ -20,19 +20,33 @@ class HomePage extends StatefulWidget {
 class HomePageState extends State<HomePage> {
   int data = 0;
 
-  increment() => data++;
-  decrement() => data--;
+  increment() {
+    if (data == 30)
+      reset();
+    else
+      data++;
+  }
+
+  decrement() {
+    data--;
+  }
+
+  reset() => data = 0;
 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('CounterApp'),
+        title: Text('Tasbih App'),
         backgroundColor: Colors.teal,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
+            Image(
+              image: AssetImage('images/tsabih.png'),
+              width: 200,
+            ),
             Text(
               '$data',
               style: TextStyle(fontSize: 60),
@@ -43,19 +57,19 @@ class HomePageState extends State<HomePage> {
                 FloatingActionButton(
                   onPressed: () {
                     setState(() {
-                      decrement();
+                      increment();
                     });
                   },
-                  child: Icon(Icons.remove),
+                  child: Icon(Icons.adjust),
                   backgroundColor: Colors.teal,
                 ),
                 FloatingActionButton(
                   onPressed: () {
                     setState(() {
-                      increment();
+                      reset();
                     });
                   },
-                  child: Icon(Icons.add),
+                  child: Icon(Icons.cached),
                   backgroundColor: Colors.teal,
                 ),
               ],
